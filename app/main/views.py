@@ -1,9 +1,9 @@
-from flask import render_template,request,redirect,url_for
+from flask import render_template,request,redirect,url_for,abort
 from . import main
 from ..models import User,Pitch
 from .forms import PitchForm,CommentForm
 import datetime
-
+from flask_login import login_required
 
 
 # Views
@@ -27,6 +27,7 @@ def index():
     return render_template('index.html' ,title = title ,interview= interview_pitches,product = product_pitches,promotion = promotion_pitches  )
 
 @main.route('/pitch/new', methods = ['GET','POST'])
+@login_required
 def new_pitch():
     pitch_form = PitchForm()
     if pitch_form.validate_on_submit():
