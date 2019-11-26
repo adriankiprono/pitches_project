@@ -2,12 +2,16 @@
 from . import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash,check_password_hash
-class User(db.Model):
+from flask_login import UserMixin
+from . import login_manager
+
+class User(UserMixin,db.Model):
     __tablename__ ="users"
     id = db.Column(db.Integer, primary_key= True)
     username = db.Column(db.String(255), nullable=False, unique=True)
     firstname = db.Column(db.String(100))
     lastname = db.Column(db.String(100))
+    email = db.Column(db.String(255),unique = True,index = True)
     pass_secure = db.Column(db.String(255))
 
     date_joined = db.Column(db.DateTime,default=datetime.utcnow)
@@ -52,13 +56,5 @@ class Pitch(db.Model):
     def get_pitch(cls,id):
         pitch = Pitch.query.filter_by(id = id).all()
         return pitch
-
-
-
-    
-    
-
-
-
 
 
