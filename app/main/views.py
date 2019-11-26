@@ -1,7 +1,8 @@
 from flask import render_template,request,redirect,url_for
 from . import main
 from ..models import User,Pitch
-from .forms import PitchForm
+from .forms import PitchForm,CommentForm
+import datetime
 
 
 
@@ -66,7 +67,8 @@ def promotion_pitches():
 @main.route('/pitch/<int:id>', methods = ['GET','POST'])
 def pitch(id):
     pitch = Pitch.get_pitch(id)
-    posted_date = pitch.posted.strftime('%b %d, %Y')
+    
+    
 
     if request.args.get("like"):
         pitch.likes = pitch.likes + 1
@@ -84,7 +86,10 @@ def pitch(id):
 
         return redirect("/pitch/{pitch_id}".format(pitch_id=pitch.id))
 
-    return render_template("pitch.html", pitch = pitch,  date = posted_date)
+    
+
+
+    return render_template("pitch.html", pitch = pitch)
 
 
 
