@@ -1,6 +1,8 @@
 from flask import render_template,request,redirect,url_for
 from . import main
 from ..models import User,Pitch
+from .forms import PitchForm
+
 
 
 # Views
@@ -28,11 +30,11 @@ def new_pitch():
     pitch_form = PitchForm()
     if pitch_form.validate_on_submit():
         title = pitch_form.title.data
-        pitch = pitch_form.text.data
         category = pitch_form.category.data
+        pitch = pitch_form.text.data
 
         # Updated pitch instance
-        new_pitch = Pitch(pitch_title=title,pitch_content=pitch,category=category,user=current_user,likes=0,dislikes=0)
+        new_pitch = Pitch(pitch_title=title,pitch_content=pitch,category=category,likes=0,dislikes=0)
 
         # Save pitch method
         new_pitch.save_pitch()
@@ -41,7 +43,7 @@ def new_pitch():
     title = 'New pitch'
     return render_template('new_pitch.html',title = title,pitch_form=pitch_form )
 
-    @main.route('/pitches/interview_pitches')
+@main.route('/pitches/interview_pitches')
 def interview_pitches():
 
     pitches = Pitch.get_pitches('interview')
@@ -74,8 +76,8 @@ def pitch(id):
 
         return redirect("/pitch/{pitch_id}".format(pitch_id=pitch.id))
 
-        elif request.args.get("dislike"):
-            pitch.dislikes = pitch.dislikes + 1
+    elif request.args.get("dislike"):
+        pitch.dislikes = pitch.dislikes + 1
 
         db.session.add(pitch)
         db.session.commit()
