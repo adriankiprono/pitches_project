@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+
+{%block content%}
+
+<div class="jumbotron text-center" style="background-color: rgb(141, 16, 110); ">
+    <h1 style="font-family: 'Permanent Marker', cursive;">Product Pitches</h1>
+</div>
+<div class="container" style="font-family: 'Permanent Marker', cursive;">
+    <hr>
+    <div class="row">
+        {{macro.displayPitches(pitches)}}
+    </div>
+</div>
+{%endblock%}
