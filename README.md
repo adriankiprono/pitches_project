@@ -2,6 +2,11 @@
 This is a website allows a user to login after registtration and is able ti give their pitch and post and people can comment on it.
 
 ### Author
+## DESCRIPTION
+
+- this is an application that use to choose from three catergory of pitches and create your own pitch after you have saved it .
+- this happens after you have login  or signed up in the app and receive an email from the application .
+- you can update your profile and upload your image
 
  ADRIAN KIPRONO
  ## Installing  And Setup
