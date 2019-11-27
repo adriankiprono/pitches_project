@@ -31,6 +31,6 @@ To view the application go to [click here](  )
 > [email](tuimuradrian6@gmail.com) .
 
 ### License
->You can check out the license
+>You can check out the [license here](LICENSE)
 
 Copyright (c) 2019 **ADRIAN KIPRONO**
