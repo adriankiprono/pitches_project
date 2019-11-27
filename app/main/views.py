@@ -4,7 +4,7 @@ from ..models import User,Pitch
 from .forms import PitchForm,UpdateProfile
 import datetime
 from flask_login import login_required
-from .. import db
+from .. import db,photos
 
 
 # Views
@@ -30,14 +30,14 @@ def index():
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
-    pitches_count = Pitch.count_pitches(uname)
+    
     user_joined = user.date_joined.strftime('%b %d, %Y')
 
 
     if user is None:
         abort(404)
 
-    return render_template("profile/profile.html", user = user, pitches = pitches_count, date= user_joined)
+    return render_template("profile/profile.html", user = user,  date= user_joined)
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
@@ -57,6 +57,17 @@ def update_profile(uname):
         return redirect(url_for('.profile',uname=user.username))
 
     return render_template('profile/update.html',form = form)
+
+@main.route('/user/<uname>/update/pic',methods= ['GET','POST'])
+@login_required
+def update_pic(uname):
+    user = User.query.filter_by(username = uname).first()
+    if 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        path = f'photos/{filename}'
+        user.profile_pic_path = path
+        db.session.commit()
+    return redirect(url_for('main.profile',uname=uname))
 
 @main.route('/pitch/new', methods = ['GET','POST'])
 @login_required

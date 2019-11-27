@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="col-md-9">
-            <p>Name: {{user.firstname}} {{user.lastname}} </p>
+            <p>Name: {{user.username}}  </p>
             <p>No of piches: {{pitches}}</p>
             <p>Date joined: {{date}}</p>
         </div>
@@ -40,9 +40,9 @@
             <p> {{user.username| capitalize}} has no bio </p>
           {% endif %}
 
-          <!-- {% if user == current_user %}
+          {% if user == current_user %}
           <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
-          {% endif %} -->
+          {% endif %}
         </div>
     </div>
 </div>
