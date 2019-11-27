@@ -12,7 +12,7 @@ This is a website allows a user to login after registtration and is able ti give
  ## Installing  And Setup
 
 
-To view the application go to [click here](  )
+To view the application go to [click here]( https://adrianpitches.herokuapp.com/ )
 
 - Step 1: Clone this repo :git clone (https://github.com/adriankiprono/pitches_project.git)
 
