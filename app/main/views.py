@@ -111,6 +111,7 @@ def promotion_pitches():
 @main.route('/pitch/<int:id>', methods = ['GET','POST'])
 def pitch(id):
     pitch = Pitch.get_pitch(id)
+    posted_date = pitch.posted.strftime('%b %d, %Y')
     
     
 
@@ -132,8 +133,25 @@ def pitch(id):
 
     
 
+    
+
 
     return render_template("pitch.html", pitch = pitch)
+
+
+@main.route('/user/<uname>/pitches')
+def user_pitches(uname):
+    user = User.query.filter_by(username=uname).first()
+    pitches = Pitch.query.filter_by(user_id = user.id).all()
+    
+    
+    user_joined = user.date_joined.strftime('%b %d, %Y')
+
+    return render_template("profile/pitches.html", user=user,pitches=pitches,date = user_joined)
+    
+
+    
+ 
 
 
 

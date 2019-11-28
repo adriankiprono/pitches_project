@@ -23,6 +23,7 @@ class User(UserMixin,db.Model):
     date_joined = db.Column(db.DateTime,default=datetime.utcnow)
     
     pitches =  db.relationship('Pitch', backref = 'user', lazy = "dynamic")
+    
 
     @property
     def password(self):
@@ -50,6 +51,8 @@ class Pitch(db.Model):
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     likes = db.Column(db.Integer)
     dislikes = db.Column(db.Integer)
+
+    
     
     def save_pitch(self):
         db.session.add(self)
@@ -63,5 +66,4 @@ class Pitch(db.Model):
     def get_pitch(cls,id):
         pitch = Pitch.query.filter_by(id = id).all()
         return pitch
-
 
