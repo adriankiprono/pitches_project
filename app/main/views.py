@@ -3,7 +3,7 @@ from . import main
 from ..models import User,Pitch
 from .forms import PitchForm,UpdateProfile
 import datetime
-from flask_login import login_required
+from flask_login import login_required,current_user
 from .. import db,photos
 
 
@@ -29,15 +29,16 @@ def index():
 
 @main.route('/user/<uname>')
 def profile(uname):
+    user_id = current_user.id
     user = User.query.filter_by(username = uname).first()
     
     user_joined = user.date_joined.strftime('%b %d, %Y')
-
+    pitches = Pitch.query.filter_by(user_id=user.id).all()
 
     if user is None:
         abort(404)
 
-    return render_template("profile/profile.html", user = user,  date= user_joined)
+    return render_template("profile/profile.html", user = user,  date= user_joined, pitches=pitches)
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
@@ -72,6 +73,7 @@ def update_pic(uname):
 @main.route('/pitch/new', methods = ['GET','POST'])
 @login_required
 def new_pitch():
+    user=current_user.id
     pitch_form = PitchForm()
     if pitch_form.validate_on_submit():
         title = pitch_form.title.data
@@ -79,7 +81,7 @@ def new_pitch():
         pitch = pitch_form.text.data
 
         # Updated pitch instance
-        new_pitch = Pitch(pitch_title=title,pitch_content=pitch,category=category,likes=0,dislikes=0)
+        new_pitch = Pitch(pitch_title=title,pitch_content=pitch,category=category,likes=0,dislikes=0,user_id=user)
 
         # Save pitch method
         new_pitch.save_pitch()
@@ -133,21 +135,20 @@ def pitch(id):
 
     
 
-    
-
 
     return render_template("pitch.html", pitch = pitch)
 
 
 @main.route('/user/<uname>/pitches')
 def user_pitches(uname):
+    user=current_user.id
     user = User.query.filter_by(username=uname).first()
     pitches = Pitch.query.filter_by(user_id = user.id).all()
     
     
     user_joined = user.date_joined.strftime('%b %d, %Y')
 
-    return render_template("profile/pitches.html", user=user,pitches=pitches,date = user_joined)
+    return render_template("profile/pitches.html", user=user,pitches=pitches,date = user_joined,user_id=user)
     
 
     
