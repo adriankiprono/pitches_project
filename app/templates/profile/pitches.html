@@ -1,11 +1,16 @@
 {% extends 'base.html'%}
 {%import 'macros.html' as macro%}
+{%block styles%}
+    {{ super() }}
+    <link href="https://fonts.googleapis.com/css?family=Alatsi|Bebas+Neue|Lato|Raleway&display=swap" rel="stylesheet">
+    
+{%endblock%}
 
 {% block content %}
-<div class="container">
+<div class="container" style="background-color: #98D2EB; ">
     <div class="row">
         <!-- displaying  Username-->
-        <h3> {{user.username| capitalize}} </h3>
+        <h3 style="font-size: 50px;font-family: 'Alatsi', sans-serif;color: rgb(2, 2, 2); ;"> {{user.username| capitalize}} </h3>
         <hr>
         <!--Display profile photo-->
         <div class="col-md-3">
@@ -17,16 +22,23 @@
                 {% endif %}
             </div>
         </div>
-        <div class="col-md-9">
-            <p>Name: {{user.username}}  </p>
+        <div class="col-md-9" style="font-size: 40px; text-decoration:underline;">
+            <p>Name: {{user.username }}  </p>
             
             <p>Date joined: {{date}}</p>
         </div>
         <div class="row">
-            <div class="col-md-12">
-              <h3> Pitches </h3>
-              <hr>
-               {{macro.displayPitches(pitches)}}
+            <div class="col-md-12" style="font-size: 20px;">
+                <h3 style="font-family: 'Bebas Neue', cursive; font-size:30px;"> Pitches </h3>
+                    <hr>
+                {% for ptch in pitches %}
+                <h5 style=" font-size:30px;">title</h5>
+                {{ptch.pitch_title}}<br>
+                <h5 style=" font-size:30px;">description</h5>
+                {{ptch.pitch_content}}
+                <h5 style=" font-size:30px;">category</h5>
+                {{ptch.category}}
+                {% endfor %}
             </div>
         </div>
     </div>
