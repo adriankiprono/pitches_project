@@ -1,10 +1,15 @@
 {% extends 'base.html'%}
+{%block styles%}
+    {{ super() }}
+    <link href="https://fonts.googleapis.com/css?family=Alatsi|Bebas+Neue|Lato|Raleway&display=swap" rel="stylesheet">    
+{%endblock%}
+
 
 {% block content %}
 <div class="container" style="background-color: #63C7F9">
     <div class="row">
         <!-- displaying  Username-->
-        <h3> {{user.username| capitalize}} </h3>
+        <h3 style="font-size: 50px;"> {{user.username| capitalize}} </h3>
         <hr>
         <!--Display profile photo-->
         <div class="col-md-4">
@@ -23,7 +28,7 @@
                     {% endif %}
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9" style="font-size: 30px; font-family:'Lato', sans-serif;">
             <p>Name: {{user.username}}  </p>
             <p>No of piches: {{pitches}}</p>
             <p>Date joined: {{date}}</p>
@@ -31,7 +36,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-          <h3> Bio </h3>
+          <h3 style="font-size: 40px; text-decoration:underline;"> Bio </h3>
 
           <!--Displaying user bio-->
           {% if user.bio %}
@@ -45,7 +50,7 @@
           {% endif %}
         </div>
     </div>
-    <div>
+    <div class="piches" style="font-family: 'Bebas Neue', cursive; font-size:20px;">
         
         {% for ptch in pitches %}
          {{ptch.pitch_title}}
