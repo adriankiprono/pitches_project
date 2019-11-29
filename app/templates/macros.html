@@ -10,11 +10,3 @@
     {%endfor%}
 {%endmacro%}
 
-{%macro displayComments(comments_list)%}
-    {%for comment in comments_list%}
-        <div class="col-md-12">
-            <h5 style="font-family: 'Permanent Marker', cursive;">{{comment.user.username}}</h5>
-            <p style="font-family: 'Permanent Marker', cursive;">{{comment.comment}}</p>
-        </div>
-    {%endfor%}
-{%endmacro%}

@@ -4,7 +4,7 @@
 
 {% block styles%}
     {{ super() }}
-    
+
     <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
 
 {% endblock %}
@@ -26,21 +26,21 @@
         <div class="col-md-4">
             <div class="well well-lg">
                 <h3>Interview Pitches</h3>
-                <p>Want to ace an interview in just a few words, welcome.</p>
+                <p>Got an interview? why don't step right in and create.</p>
                 <a href="{{url_for('main.interview_pitches')}}" class="btn btn-primary">View</a>
             </div>
         </div>
         <div class="col-md-4">
             <div class="well well-lg">
                 <h3>Product Pitches</h3>
-                <p>Want to talk about your products, you're in the right place.</p>
+                <p>Got a product idea you want to pitch? Come right here and create.</p>
                 <a href="{{url_for('main.product_pitches')}}" class="btn btn-primary -center">View</a>
             </div>
         </div>
         <div class="col-md-4">
             <div class="well well-lg">
                 <h3>Promotion Pitches</h3>
-                <p>Want to promote anything, step right up and begin.</p>
+                <p>Want to promote anything, step right up and create.</p>
                 <a href="{{url_for('main.promotion_pitches')}}" class="btn btn-primary -center">View</a>
             </div>
         </div>
